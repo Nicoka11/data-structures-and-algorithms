@@ -7,9 +7,11 @@ export class Node<T> {
   }
 }
 
+type PossibleNode<T> = Node<T> | null;
+
 export class SinglyLinkedList<T> {
-  head: Node<T> | null;
-  tail: Node<T> | null;
+  head: PossibleNode<T>;
+  tail: PossibleNode<T>;
   length: number;
 
   constructor() {
@@ -33,7 +35,43 @@ export class SinglyLinkedList<T> {
     return this;
   }
 
-  pop() { 
-    
+  private clean() {
+    if (this.length === 0) {
+      this.head = this.tail = null;
+    }
+  }
+
+  pop() {
+    if (!this.head) return undefined;
+
+    let current: PossibleNode<T> = this.head;
+    let newTail: PossibleNode<T> = null;
+    while (current.next) {
+      newTail = current;
+      current = current.next;
+    }
+    this.tail = newTail;
+    if (this.tail) this.tail.next = null;
+    this.length--;
+
+    this.clean();
+
+    return current;
+  }
+
+  shift() {
+    if (!this.head) return undefined;
+
+    const current = this.head;
+    this.head = this.head.next;
+    this.length--;
+
+    this.clean();
+
+    return current;
+  }
+  
+  unshift() {
+
   }
 }
