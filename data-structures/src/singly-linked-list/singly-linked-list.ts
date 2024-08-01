@@ -20,6 +20,7 @@ export class SinglyLinkedList<T> {
 
   push(value: T) {
     const n = new Node(value);
+
     if (!this.head) {
       this.head = n;
       this.tail = n;
@@ -28,14 +29,11 @@ export class SinglyLinkedList<T> {
       this.tail = n;
     }
 
-    length++;
+    this.length++;
+    return this;
+  }
+
+  pop() { 
+    
   }
 }
-
-const list = new SinglyLinkedList();
-
-list.push(42);
-list.push("Forty Two");
-list.push("Quarante Deux");
-
-console.log(list);
