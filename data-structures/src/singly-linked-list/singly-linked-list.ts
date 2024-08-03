@@ -70,8 +70,39 @@ export class SinglyLinkedList<T> {
 
     return current;
   }
-  
-  unshift() {
 
+  unshift(value: T) {
+    const n = new Node(value);
+    if (!this.head) {
+      this.head = n;
+      this.tail = n;
+    } else {
+      const prev = this.head;
+      this.head = n;
+      this.head.next = prev;
+    }
+
+    this.length++;
+    return this;
+  }
+
+  get(index: number) {
+    let currentElement: PossibleNode<T> | undefined = this.head;
+    let currentIndex = 0;
+
+    while (currentIndex !== index) {
+      currentElement = currentElement?.next;
+      currentIndex++;
+    }
+
+    return currentElement;
+  }
+
+  set(index: number, value: T) {
+    const node = this.get(index);
+    if (!node) return false;
+
+    node.value = value;
+    return true;
   }
 }
