@@ -1,7 +1,7 @@
 import "./style.css";
 import typescriptLogo from "./typescript.svg";
 import viteLogo from "/vite.svg";
-import { SinglyLinkedList } from "./singly-linked-list/singly-linked-list";
+import { Queue } from "./queue";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
@@ -15,10 +15,19 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
 `;
 
-const list = new SinglyLinkedList();
+const list = new Queue<number | string>();
 
-list.push(42);
-list.push("Forty Two");
-list.push("Quarante Deux");
-
+list.enQueue(42);
+list.enQueue("Forty Two");
+list.enQueue("Quarante Deux");
 console.log(list);
+
+console.log(list.deQueue());
+console.log(list.deQueue());
+console.log(list.deQueue());
+console.log(list.deQueue());
+
+list.enQueue("Quarante Douze");
+
+console.log(list.deQueue());
+console.log(list.deQueue());
